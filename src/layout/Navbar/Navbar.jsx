@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { NavLink } from "react-router-dom";
 
 const Navbar = () => {
   const [isToggleOpen, setIsToggleOpen] = useState(false);
@@ -63,38 +64,39 @@ const Navbar = () => {
                 }`}
               >
                 <li role="none" className="flex items-stretch">
-                  <a
-                    role="menuitem"
-                    aria-haspopup="false"
-                    tabIndex="0"
+                  <NavLink to='/'
                     className="flex items-center gap-2 py-4 transition-colors duration-300 hover:text-emerald-500 focus:bg-emerald-50 focus:outline-none focus-visible:outline-none lg:px-8"
-                    href="javascript:void(0)"
+                    
                   >
-                    <span>Blog</span>
-                  </a>
+                    <span>Home</span>
+                  </NavLink>
                 </li>
                 <li role="none" className="flex items-stretch">
-                  <a
-                    role="menuitem"
-                    aria-current="page"
-                    aria-haspopup="false"
-                    tabIndex="0"
+                  <NavLink
+                 to='/instructors'
                     className="flex items-center gap-2 py-4 transition-colors duration-300 hover:text-emerald-600 focus:bg-emerald-50 focus:outline-none focus-visible:outline-none lg:px-8"
-                    href="javascript:void(0)"
+                   
                   >
-                    <span>Planning</span>
-                  </a>
+                    <span>Instructors</span>
+                  </NavLink>
                 </li>
                 <li role="none" className="flex items-stretch">
-                  <a
-                    role="menuitem"
-                    aria-haspopup="false"
-                    tabIndex="0"
+                  <NavLink
+                   to='/classes'
                     className="flex items-center gap-2 py-4 transition-colors duration-300 hover:text-emerald-500 focus:bg-emerald-50 focus:outline-none focus-visible:outline-none lg:px-8"
-                    href="javascript:void(0)"
+                    
                   >
-                    <span>About me</span>
-                  </a>
+                    <span>Classes</span>
+                  </NavLink>
+                </li>
+                <li role="none" className="flex items-stretch">
+                  <NavLink
+                to='/dashboard'
+                    className="flex items-center gap-2 py-4 transition-colors duration-300 hover:text-emerald-500 focus:bg-emerald-50 focus:outline-none focus-visible:outline-none lg:px-8"
+                  
+                  >
+                    <span>Dashboard</span>
+                  </NavLink>
                 </li>
               </ul>
               <div className="ml-auto flex items-center px-6 lg:ml-0 lg:p-0">

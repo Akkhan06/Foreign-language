@@ -12,10 +12,12 @@
   "dependencies": {
     "@glidejs/glide": "^3.6.0",
     "aos": "^2.3.4",
+    "axios": "^1.4.0",
     "firebase": "^9.22.1",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
-    "react-helmet": "^6.1.0"
+    "react-helmet": "^6.1.0",
+    "react-query": "^3.39.3"
   },
   "devDependencies": {
     "@types/react": "^18.0.37",
