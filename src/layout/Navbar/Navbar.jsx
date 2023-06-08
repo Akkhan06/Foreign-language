@@ -127,14 +127,15 @@ const Navbar = () => {
               </li>
                 }
               </ul>
-              <div className="ml-auto flex items-center px-6 lg:ml-0 lg:p-0">
+              {
+                user && <div className="ml-auto flex items-center px-6 lg:ml-0 lg:p-0">
                 {/*        <!-- Avatar --> */}
                 <a
                   href="#"
                   className="relative inline-flex h-10 w-10 items-center justify-center rounded-full text-white"
                 >
                   <img
-                    src="https://i.pravatar.cc/40?img=35"
+                    src={user?.photoURL}
                     alt="user name"
                     title="user name"
                     width="40"
@@ -147,6 +148,7 @@ const Navbar = () => {
                 </a>
                 {/*        <!-- End Avatar --> */}
               </div>
+              }
             </nav>
           </div>
         </header>

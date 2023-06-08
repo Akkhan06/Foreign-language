@@ -1,6 +1,7 @@
 import React, { useEffect } from "react";
 import AOS from "aos";
 import "aos/dist/aos.css";
+import Button from "../Button/Button";
 
 const Hero = () => {
   useEffect(() => {
@@ -25,10 +26,7 @@ const Hero = () => {
             <p className="py-4 w-2/3 md:w-auto">
             Discover the keys to unlocking your innate ability to speak multiple languages fluently.
             </p>
-
-            <button className="btn btn-warning text-white">
-              Discover More
-            </button>
+            <Button title={'Our courses'}/>
           </div>
         </div>
 
