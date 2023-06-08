@@ -1,8 +1,18 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { NavLink } from "react-router-dom";
+import { AuthContext } from "../../providers/AuthProvider";
 
 const Navbar = () => {
   const [isToggleOpen, setIsToggleOpen] = useState(false);
+  const { user, logOut } = useContext(AuthContext);
+
+
+    const handleLogOut = () => {
+        logOut()
+            .then(() => { })
+            .catch(error => console.log(error));
+    }
+    
   return (
     <div className="">
       <>
@@ -71,14 +81,7 @@ const Navbar = () => {
                     <span>Home</span>
                   </NavLink>
                 </li>
-                <li role="none" className="flex items-stretch">
-                  <NavLink to='/login'
-                    className="flex items-center gap-2 py-4 transition-colors duration-300 hover:text-emerald-500 focus:bg-emerald-50 focus:outline-none focus-visible:outline-none lg:px-8"
-                    
-                  >
-                    <span>Login</span>
-                  </NavLink>
-                </li>
+                
                 <li role="none" className="flex items-stretch">
                   <NavLink
                  to='/instructors'
@@ -97,7 +100,7 @@ const Navbar = () => {
                     <span>Classes</span>
                   </NavLink>
                 </li>
-                <li role="none" className="flex items-stretch">
+                {user ? <><li role="none" className="flex items-stretch">
                   <NavLink
                 to='/dashboard'
                     className="flex items-center gap-2 py-4 transition-colors duration-300 hover:text-emerald-500 focus:bg-emerald-50 focus:outline-none focus-visible:outline-none lg:px-8"
@@ -106,6 +109,23 @@ const Navbar = () => {
                     <span>Dashboard</span>
                   </NavLink>
                 </li>
+                <li role="none" className="flex items-stretch">
+                <NavLink onClick={handleLogOut}
+                  className="flex items-center gap-2 py-4 transition-colors duration-300 hover:text-emerald-500 focus:bg-emerald-50 focus:outline-none focus-visible:outline-none lg:px-8"
+                  
+                >
+                  <span>Log Out</span>
+                </NavLink>
+                </li></>
+                : <li role="none" className="flex items-stretch">
+                <NavLink to='/login'
+                  className="flex items-center gap-2 py-4 transition-colors duration-300 hover:text-emerald-500 focus:bg-emerald-50 focus:outline-none focus-visible:outline-none lg:px-8"
+                  
+                >
+                  <span>Login</span>
+                </NavLink>
+              </li>
+                }
               </ul>
               <div className="ml-auto flex items-center px-6 lg:ml-0 lg:p-0">
                 {/*        <!-- Avatar --> */}
