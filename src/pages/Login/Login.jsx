@@ -42,7 +42,7 @@ const Login = () => {
     return (
         <>
             <Helmet>
-                <title>Bistro Boss | Login</title>
+                <title>Foreign Language | Login</title>
             </Helmet>
             <div className="hero py-5 md:min-h-screen bg-base-200">
                 <div>
