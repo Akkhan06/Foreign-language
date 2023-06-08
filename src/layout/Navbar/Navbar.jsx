@@ -72,6 +72,14 @@ const Navbar = () => {
                   </NavLink>
                 </li>
                 <li role="none" className="flex items-stretch">
+                  <NavLink to='/login'
+                    className="flex items-center gap-2 py-4 transition-colors duration-300 hover:text-emerald-500 focus:bg-emerald-50 focus:outline-none focus-visible:outline-none lg:px-8"
+                    
+                  >
+                    <span>Login</span>
+                  </NavLink>
+                </li>
+                <li role="none" className="flex items-stretch">
                   <NavLink
                  to='/instructors'
                     className="flex items-center gap-2 py-4 transition-colors duration-300 hover:text-emerald-600 focus:bg-emerald-50 focus:outline-none focus-visible:outline-none lg:px-8"
