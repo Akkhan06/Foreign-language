@@ -6,6 +6,8 @@ import Home from "../pages/Home/Home";
 import ErrorPage from "../ErrorPage/ErrorPage";
 import SignUp from "../pages/Signup/SignUp";
 import Login from "../pages/Login/Login";
+import Instructor from "../components/Instructor/Instructor";
+import InstructorPage from "../pages/InstructorPage/InstructorPage";
 
   export const route = createBrowserRouter ([
     {
@@ -23,6 +25,10 @@ import Login from "../pages/Login/Login";
         {
           path:'login',
           element: <Login/>
+        },
+        {
+          path:'instructor',
+          element: <InstructorPage/>
         }
       ]
     }
