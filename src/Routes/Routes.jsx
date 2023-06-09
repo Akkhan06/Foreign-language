@@ -9,6 +9,11 @@ import Login from "../pages/Login/Login";
 import InstructorPage from "../pages/InstructorPage/InstructorPage";
 import Dashboard from "../layout/Dashboard";
 import Classes from "../components/Classes/Classes";
+import AdminHome from "../pages/Dashboard/Admin/AdminHome";
+import Selected from "../pages/Dashboard/Student/Selected";
+import EnroledClass from "../pages/Dashboard/Student/EnroledClass";
+import PaymentHistory from "../pages/Dashboard/Student/PaymentHistory";
+
 
 
 
@@ -41,6 +46,20 @@ import Classes from "../components/Classes/Classes";
     },
     {
       path: 'dashboard',
-      element: <Dashboard/>
+      element: <Dashboard/>,
+      children: [
+        {
+          path: '/dashboard',
+          element: <Selected/>
+        },
+        {
+          path: '/dashboard/enrolled',
+          element: <EnroledClass/>
+        }, 
+        {
+          path: '/dashboard/history',
+          element: <PaymentHistory/>
+        }
+      ]
     }
   ])
