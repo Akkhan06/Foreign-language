@@ -8,6 +8,7 @@ import SignUp from "../pages/Signup/SignUp";
 import Login from "../pages/Login/Login";
 import InstructorPage from "../pages/InstructorPage/InstructorPage";
 import Dashboard from "../layout/Dashboard";
+import Classes from "../components/Classes/Classes";
 
 
 
@@ -31,6 +32,10 @@ import Dashboard from "../layout/Dashboard";
         {
           path:'instructor',
           element: <InstructorPage/>
+        },
+        {
+          path: 'classes',
+          element: <Classes/>
         }
       ]
     },

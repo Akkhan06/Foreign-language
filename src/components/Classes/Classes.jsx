@@ -2,6 +2,7 @@ import React from "react";
 import Button from "../Button/Button";
 import useAuth from '../../hooks/useAuth'
 import Swal from "sweetalert2";
+import HeaderTitle from "../HeaderTitle/HeaderTitle";
 
 const Classes = () => {
   const {user} = useAuth()
@@ -11,18 +12,8 @@ const Classes = () => {
   return (
     <>
       <div className="w-10/12 mx-auto">
-        <div className="mx-auto text-center mt-24">
-          <h1 class="mb-4 text-4xl font-extrabold leading-none tracking-tight text-gray-900 md:text-5xl lg:text-6xl dark:text-white">
-            Most courses selling
-          </h1>
-          <p class="mb-6 text-lg font-normal text-gray-500 lg:text-xl sm:px-16 xl:px-48 dark:text-gray-400">
-            Here at Flowbite we focus on markets where technology, innovation,
-            and capital can unlock long-term value and drive economic growth.
-          </p>
-          <hr />
-        </div>
-
-
+        
+        {<HeaderTitle title={'All classes'} subTitle={'Here at Flowbite we focus on markets where technology, innovation, and capital can unlock long-term value and drive economic growth.'}/>}
         
         <div className="mb-24">
           <h1 className="btn btn-sm mt-14 mb-5 bg-warning text-white font-semibold">Classes</h1>
