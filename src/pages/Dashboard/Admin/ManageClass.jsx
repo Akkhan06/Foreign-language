@@ -1,14 +1,79 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import HeaderTitle from "../../../components/HeaderTitle/HeaderTitle";
+import { Helmet } from "react-helmet";
+import useAxios from "../../../hooks/useAxios";
+import Swal from "sweetalert2";
+import { key } from "localforage";
 
 const ManageClass = () => {
+const [axiosSe] = useAxios()
+  const url = 'http://localhost:5000/myclass'
+  const [status, setStatus] = useState("pending")
+ 
+  
+  const [card, setCard] = useState([])
+  useEffect(() => {
+    fetch(url)
+    .then(res => res.json())
+    .then(data => setCard(data))
+  },[url])
+
+
+  const statusHandler = (_id) => {
+    Swal.fire({
+      title: 'Do you want to save the changes?',
+      showDenyButton: true,
+      showCancelButton: true,
+      confirmButtonText: 'Save',
+      denyButtonText: `Don't save`,
+    }).then((result) => {
+      /* Read more about isConfirmed, isDenied below */
+      if (result.isConfirmed) {
+        const status = 'Approved';
+        fetch(`http://localhost:5000/myclass/${_id}`, {
+          method: 'PUT'
+      })
+      .then(res => res.json())
+      .then(data => {
+          console.log(data)
+          const finalResult = card.find(x => x._id === _id)
+          console.log(finalResult)
+          axiosSe.post('/classes', finalResult).then(finalData => {console.log(finalData.data)})
+          Swal.fire('Saved!', '', 'success')
+      })
+        
+      } else if (result.isDenied) {
+        fetch(`http://localhost:5000/myclass/${user._id}`, {
+          method: 'PUT'
+      })
+      .then(res => res.json())
+      .then(data => {
+          console.log(data)
+          // if(data.modifiedCount){
+          //     refetch();
+          //     Swal.fire({
+          //         position: 'top-end',
+          //         icon: 'success',
+          //         title: `${user.name} is an Admin Now!`,
+          //         showConfirmButton: false,
+          //         timer: 1500
+          //       })
+          // }
+          Swal.fire('Changes are not saved', '', 'info')
+      })
+      }
+    })
+  }
+
+
+
   return (
     <div>
       <div>
         <HeaderTitle title={"Class management"} />
         <section className="flex flex-col justify-center antialiased bg-gray-100 text-gray-600  p-4">
           <div className="h-full">
-            <div className="w-full max-w-2xl mx-auto bg-white shadow-lg rounded-sm border border-gray-200">
+            <div className="w-full mx-auto bg-white shadow-lg rounded-sm border border-gray-200">
               <header className="px-5 py-4 border-b border-gray-100">
                 <h2 className="font-semibold text-gray-800">Class manage</h2>
               </header>
@@ -19,26 +84,43 @@ const ManageClass = () => {
                       <tr>
                         <th className="p-2 whitespace-nowrap">
                           <div className="font-semibold text-left">
-                            Total Enrolled Students
+                          Class Name
                           </div>
                         </th>
                         <th className="p-2 whitespace-nowrap">
                           <div className="font-semibold text-left">
-                            Feedback
+                          Instructor name
                           </div>
                         </th>
                         <th className="p-2 whitespace-nowrap">
-                          <div className="font-semibold text-left">Action</div>
+                          <div className="font-semibold text-left"> Instructor email</div>
                         </th>
                         <th className="p-2 whitespace-nowrap">
                           <div className="font-semibold text-center">
-                            status
+                          Available seats
+                          </div>
+                        </th>
+                        <th className="p-2 whitespace-nowrap">
+                          <div className="font-semibold text-center">
+                          Price
+                          </div>
+                        </th>
+                        <th className="p-2 whitespace-nowrap">
+                          <div className="font-semibold text-center">
+                          Status
+                          </div>
+                        </th>
+                        <th className="p-2 whitespace-nowrap">
+                          <div className="font-semibold text-center">
+                          Action
                           </div>
                         </th>
                       </tr>
                     </thead>
                     <tbody className="text-sm divide-y divide-gray-100">
-                      <tr>
+
+                     {card && 
+                     card.map(pd =>  <tr> 
                         <td className="p-2 whitespace-nowrap">
                           <div className="flex items-center">
                             <div className="w-10 h-10 flex-shrink-0 mr-2 sm:mr-3">
@@ -50,27 +132,37 @@ const ManageClass = () => {
                                 alt="Alex Shatov"
                               />
                             </div>
-                            <div className="font-medium text-gray-800">200</div>
+                            <div className="font-medium text-gray-800">{pd.classes}</div>
                           </div>
                         </td>
                         <td className="p-2 whitespace-nowrap">
-                          <div className="text-left">awesome course</div>
+                          <div className="text-left">{pd.instructor}</div>
+                        </td>
+                        <td className="p-2 whitespace-nowrap">
+                          <div className="text-left">{pd.email}</div>
+                        </td>
+                        <td className="p-2 whitespace-nowrap">
+                          <div className="text-center">{pd.seats}</div>
+                        </td>
+                        <td className="p-2 whitespace-nowrap">
+                          <div className="text-left">${pd.price}</div>
                         </td>
                         <td className="p-2">
                           <div className="text-center">
-                            <button className="btn btn-xs bg-warning text-white">
-                              Update
+                           <button className={`btn text-white btn-xs ${pd.status === 'pending' ? 'bg-red-500' : 'bg-success'}`}>
+                              {status === "pending" ? 'Pending' : pd.status === 'approved' ? 'Approved' : 'denied'}
                             </button>
                           </div>
                         </td>
                         <td className="p-2">
                           <div className="text-center">
-                            <button className="btn text-white btn-xs bg-success">
-                              Approved
+                          <button onClick={() => statusHandler(pd._id)} className="btn btn-xs disabled bg-warning text-white">
+                              Deny
                             </button>
                           </div>
                         </td>
-                      </tr>
+                      </tr>)
+                      }
                     </tbody>
                   </table>
                 </div>

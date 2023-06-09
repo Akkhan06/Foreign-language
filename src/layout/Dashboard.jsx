@@ -1,4 +1,5 @@
 import React from "react";
+import { Helmet } from "react-helmet";
 import {
   FaBell,
   FaCheck,
@@ -15,6 +16,9 @@ import { Link, Outlet } from "react-router-dom";
 const Dashboard = () => {
   return (
     <div className="flex">
+        <Helmet>
+        <title>Foreign Language | dashboard</title>
+      </Helmet>
       <div className="flex flex-col h-screen p-3 bg-white shadow w-60">
         <div className="space-y-3">
           <div className="flex items-center">

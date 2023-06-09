@@ -39,9 +39,7 @@ const SignUp = () => {
             image: imgUrl,
           };
           console.log(newData.image);
-          // axiosSe.post("/menu", newData).then((data) => {
-          //   console.log(data.data);
-          // });
+
 
           createUser(data.email, data.password).then((result) => {
             const loggedUser = result.user;
@@ -50,7 +48,7 @@ const SignUp = () => {
             updateUserProfile(data.name, newData.image)
               .then(() => {
                 const saveUser = { name: data.name, email: data.email };
-                fetch("http://localhost:5000/users", {
+                fetch("http://localhost:5000/user", {
                   method: "POST",
                   headers: {
                     "content-type": "application/json",
@@ -83,7 +81,7 @@ const SignUp = () => {
   return (
     <>
       <Helmet>
-        <title>Bistro Boss | Sign Up</title>
+        <title>Foreign Language | Sign Up</title>
       </Helmet>
       <div className="hero min-h-screen py-5 bg-base-200">
         <div className="card flex-shrink-0  w-10/12 md:w-1/2 max-w-sm shadow-2xl bg-base-100">
