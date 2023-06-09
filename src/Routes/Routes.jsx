@@ -15,6 +15,8 @@ import EnroledClass from "../pages/Dashboard/Student/EnroledClass";
 import PaymentHistory from "../pages/Dashboard/Student/PaymentHistory";
 import AddClass from "../pages/Dashboard/Instructor/AddClass";
 import MyClass from "../pages/Dashboard/Instructor/MyClass";
+import ManageUser from "../pages/Dashboard/Admin/ManageUser";
+import ManageClass from "../pages/Dashboard/Admin/ManageClass";
 
 
 
@@ -63,12 +65,20 @@ import MyClass from "../pages/Dashboard/Instructor/MyClass";
           element: <PaymentHistory/>
         },
         {
-          path: '/dashboard',
-          element: <MyClass/>
+          path: '/dashboard/adminhome',
+          element: <AdminHome/>
         },
         {
           path: '/dashboard/addclass',
           element: <AddClass/>
+        },
+        {
+          path: "/dashboard/manageclass",
+          element: <ManageClass/>
+        },
+        {
+          path: '/dashboard/manageuser',
+          element: <ManageUser/>
         }
       ]
     }

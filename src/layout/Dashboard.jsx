@@ -7,6 +7,8 @@ import {
   FaHome,
   FaProductHunt,
   FaQrcode,
+  FaUser,
+  FaWallet,
 } from "react-icons/fa";
 import { Link, Outlet } from "react-router-dom";
 
@@ -20,6 +22,19 @@ const Dashboard = () => {
           </div>
           <div className="flex-1">
             <ul className="pt-2 pb-4 space-y-1 text-sm">
+
+              {/* Admin Dashboard */}
+              <li className="rounded-sm">
+                <Link to={'/dashboard/adminhome'} className="flex items-center font-semibold p-2 space-x-3 rounded-md gap-2"><FaHome/> Admin Home</Link>
+              </li>
+              <li className="rounded-sm">
+                <Link to='/dashboard/manageclass' className="flex items-center font-semibold p-2 space-x-3 rounded-md gap-2"><FaWallet/> Manage Classes</Link>
+              </li>
+              <li className="rounded-sm">
+                <Link to='/dashboard/manageuser' className="flex items-center font-semibold p-2 space-x-3 rounded-md gap-2"><FaUser/> Manage Users</Link>
+              </li>
+
+
               {/* Student dashboard */}
               {/* <li className="rounded-sm">
                 <Link to={'/dashboard'} className="flex items-center font-semibold p-2 space-x-3 rounded-md gap-2"><FaCheckCircle/> My Selected Classes</Link>
@@ -32,7 +47,7 @@ const Dashboard = () => {
               </li> */}
 
               {/* instructor dashboard */}
-
+{/* 
               <li className="rounded-sm">
                 <Link
                   to={"/dashboard"}
@@ -49,7 +64,9 @@ const Dashboard = () => {
                   <FaProductHunt /> Add Class
                 </Link>
               </li>
-              
+               */}
+
+          
             </ul>
           </div>
 
