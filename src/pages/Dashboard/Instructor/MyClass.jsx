@@ -1,7 +1,15 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import HeaderTitle from '../../../components/HeaderTitle/HeaderTitle';
+import MySingleCard from './MySingleCard';
 
 const MyClass = () => {
+  const url = "http://localhost:5000/allclass";
+  const [classCard, setClassCard] = useState([]);
+  useEffect(() => {
+    fetch(url)
+      .then((res) => res.json())
+      .then((data) => setClassCard(data));
+  }, []);
     return (
         <div>
             <HeaderTitle title={'My all class'}/>
@@ -31,25 +39,7 @@ const MyClass = () => {
                       </tr>
                     </thead>
                     <tbody className="text-sm divide-y divide-gray-100">
-                      <tr>
-                        <td className="p-2 whitespace-nowrap">
-                          <div className="flex items-center">
-                            <div className="w-10 h-10 flex-shrink-0 mr-2 sm:mr-3">
-                              <img className="rounded-full" src="https://raw.githubusercontent.com/cruip/vuejs-admin-dashboard-template/main/src/images/user-36-05.jpg" width="40" height="40" alt="Alex Shatov" />
-                            </div>
-                            <div className="font-medium text-gray-800">200</div>
-                          </div>
-                        </td>
-                        <td className="p-2 whitespace-nowrap">
-                          <div className="text-left">awesome course</div>
-                        </td>
-                        <td className="p-2">
-                          <div className="text-center"><button className="btn btn-xs bg-warning text-white">Update</button></div>
-                        </td>
-                        <td className="p-2">
-                          <div className="text-center"><button className="btn text-white btn-xs bg-success">Approved</button></div>
-                        </td>
-                      </tr>
+                     {classCard && classCard.map(pd => <MySingleCard key={pd._id} product={pd}/>)}
                     </tbody>
                   </table>
                 </div>

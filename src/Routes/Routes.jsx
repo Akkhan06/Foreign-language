@@ -80,6 +80,10 @@ import PrivateRoute from "./PrivateRoute";
         {
           path: '/dashboard/manageuser',
           element: <ManageUser/>
+        },
+        {
+          path: '/dashboard/myclass',
+          element: <MyClass/>
         }
       ]
     }
