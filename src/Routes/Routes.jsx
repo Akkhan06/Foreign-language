@@ -13,6 +13,8 @@ import AdminHome from "../pages/Dashboard/Admin/AdminHome";
 import Selected from "../pages/Dashboard/Student/Selected";
 import EnroledClass from "../pages/Dashboard/Student/EnroledClass";
 import PaymentHistory from "../pages/Dashboard/Student/PaymentHistory";
+import AddClass from "../pages/Dashboard/Instructor/AddClass";
+import MyClass from "../pages/Dashboard/Instructor/MyClass";
 
 
 
@@ -48,10 +50,10 @@ import PaymentHistory from "../pages/Dashboard/Student/PaymentHistory";
       path: 'dashboard',
       element: <Dashboard/>,
       children: [
-        {
-          path: '/dashboard',
-          element: <Selected/>
-        },
+        // {
+        //   path: '/dashboard',
+        //   element: <Selected/>
+        // },
         {
           path: '/dashboard/enrolled',
           element: <EnroledClass/>
@@ -59,6 +61,14 @@ import PaymentHistory from "../pages/Dashboard/Student/PaymentHistory";
         {
           path: '/dashboard/history',
           element: <PaymentHistory/>
+        },
+        {
+          path: '/dashboard',
+          element: <MyClass/>
+        },
+        {
+          path: '/dashboard/addclass',
+          element: <AddClass/>
         }
       ]
     }
