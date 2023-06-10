@@ -116,7 +116,7 @@ const handleMakeInstructor = user =>{
                            Admin
                           </button>
 
-                          <button className="btn text-white btn-xs bg-yellow-500">
+                          <button onClick={() => handleMakeInstructor(user)} className="btn text-white btn-xs bg-yellow-500">
                                 Instructor
                               </button>
                         </div>
