@@ -4,12 +4,14 @@ import { Helmet } from "react-helmet";
 import useAxios from "../../../hooks/useAxios";
 import Swal from "sweetalert2";
 import { key } from "localforage";
+import useCart from "../../../hooks/useCard";
 
 const ManageClass = () => {
 const [axiosSe] = useAxios()
+const [, refetch] = useCart()
   const url = 'http://localhost:5000/myclass'
   const [status, setStatus] = useState("pending")
- 
+
   
   const [card, setCard] = useState([])
   useEffect(() => {
@@ -26,28 +28,19 @@ console.log(card)
       title: 'Do you want to save the changes?',
       showDenyButton: true,
       showCancelButton: true,
-      confirmButtonText: 'Save',
-      denyButtonText: `Don't save`,
+      confirmButtonText: 'Approved',
+      denyButtonText: `denied`,
     }).then((result) => {
       /* Read more about isConfirmed, isDenied below */
       if (result.isConfirmed) {
-        const status = 'Approved';
-        fetch(`http://localhost:5000/myclass/${_id}`, {
-          method: 'PUT'
-      })
-      .then(res => res.json())
-      .then(data => {
-          
-          const finalResult = card.find(x => x._id === _id)
-          finalResult.uniq = finalResult._id
-          delete finalResult._id
-          console.log(finalResult)
-          axiosSe.post('/classes', finalResult).then(finalData => {console.log(finalData.data)})
+        // const status = 'Approved';
+        axiosSe.put(`/myclass/${_id}`).then(data => {
+          refetch()
           Swal.fire('Saved!', '', 'success')
-      })
+        })
         
       } else if (result.isDenied) {
-        fetch(`http://localhost:5000/myclass/${_id}`, {
+        fetch(`http://localhost:5000/danied/${_id}`, {
           method: 'PUT'
       })
       .then(res => res.json())
@@ -63,6 +56,7 @@ console.log(card)
           //         timer: 1500
           //       })
           // }
+          refetch()
           Swal.fire('Changes are not saved', '', 'info')
       })
       }

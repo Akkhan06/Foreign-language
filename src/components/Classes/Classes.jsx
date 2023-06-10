@@ -9,11 +9,19 @@ const Classes = () => {
 
   const url = "http://localhost:5000/allclass";
   const [classCard, setClassCard] = useState([]);
+  const [approvedC, setApprovedC] = useState([]);
+
   useEffect(() => {
     fetch(url)
       .then((res) => res.json())
-      .then((data) => setClassCard(data));
-  }, []);
+      .then((data) => {
+        const approvedCard = data.filter(pd => pd.status === 'approved')
+        setClassCard(approvedCard)
+        console.log(approvedCard)
+      });
+  }, [url]);
+
+
 
   const modal = () => {
     Swal.fire("log in before selecting the course");
