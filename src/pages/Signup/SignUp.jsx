@@ -36,7 +36,8 @@ const SignUp = () => {
             price: parseFloat(price),
             category,
             recipe,
-            image: imgUrl,
+            image: imgUrl
+            
           };
           console.log(newData.image);
 
@@ -47,7 +48,7 @@ const SignUp = () => {
       
             updateUserProfile(data.name, newData.image)
               .then(() => {
-                const saveUser = { name: data.name, email: data.email };
+                const saveUser = { name: data.name, email: data.email, role: "user" };
                 fetch("http://localhost:5000/user", {
                   method: "POST",
                   headers: {

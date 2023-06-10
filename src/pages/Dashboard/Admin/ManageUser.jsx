@@ -1,7 +1,15 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { FaShieldAlt } from "react-icons/fa";
+import useAxios from "../../../hooks/useAxios";
 
 const ManageUser = () => {
+  const [users, setUser] = useState([])
+  const [axiosSe] = useAxios()
+  useEffect(() => {
+    axiosSe.get('/user').then(res => {
+      setUser(res.data)
+    })
+  },[])
   return (
     <div>
       <section className="flex flex-col justify-center antialiased bg-gray-100 text-gray-600  p-4">
@@ -30,7 +38,8 @@ const ManageUser = () => {
                     </tr>
                   </thead>
                   <tbody className="text-sm divide-y divide-gray-100">
-                    <tr>
+                    {users &&
+                    users.map(user => <tr>
                       <td className="p-2 whitespace-nowrap">
                         <div className="flex items-center">
                           <div className="w-10 h-10 flex-shrink-0 mr-2 sm:mr-3">
@@ -43,42 +52,32 @@ const ManageUser = () => {
                             />
                           </div>
                           <div className="font-medium text-gray-800">
-                            Afsar khan
+                            {user.name}
                           </div>
                         </div>
                       </td>
                       <td className="p-2 whitespace-nowrap">
-                        <div className="text-left">afsar@gmail.com</div>
+                        <div className="text-left">{user.email}</div>
                       </td>
                       <td className="p-2">
                         <div className="form-control w-full ">
-                          <select
-                            defaultValue="Select role"
-                            className="select select-bordered"
-                           
-                          > <FaShieldAlt/>
-                            <option disabled>Select role</option>
-                            <option>
-                              <button className="btn text-white btn-xs bg-success">
-                                Admin
-                              </button>
-                            </option>
-                            <option>
-                              <button className="btn text-white btn-xs bg-success">
-                                Instructor
-                              </button>
-                            </option>
-                          </select>
+                        <button className="btn text-white btn-xs bg-success">
+                                {user.role}
+                        </button>
                         </div>
                       </td>
                       <td className="p-2">
                         <div className="text-center">
-                          <button className="btn text-white btn-xs bg-success">
-                            Kick out
+                          <button className="btn text-white btn-xs bg-warning">
+                           Admin
                           </button>
+
+                          <button className="btn text-white btn-xs bg-yellow-500">
+                                Instructor
+                              </button>
                         </div>
                       </td>
-                    </tr>
+                    </tr>)}
                   </tbody>
                 </table>
               </div>

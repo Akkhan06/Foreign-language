@@ -7,13 +7,14 @@ import useAuth from '../../../hooks/useAuth';
 const MyClass = () => {
   const [axiosSe] = useAxios()
   const {user} = useAuth()
-  const url = "http://localhost:5000/parsonaldata?email=new@gmail.com";
+  console.log(user.email)
+
   const [classCard, setClassCard] = useState([]);
   useEffect(() => {
     axiosSe(`/parsonaldata?email=${user.email}`).then(res => {
       setClassCard(res.data)
     })
-  }, [url]);
+  }, []);
     return (
         <div>
             <HeaderTitle title={'My all class'}/>

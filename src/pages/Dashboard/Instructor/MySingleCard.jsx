@@ -1,7 +1,9 @@
 import React from 'react';
+import useAuth from '../../../hooks/useAuth';
 
 const MySingleCard = ({product}) => {
-    const  { classes, price, instructor, seats, image }  = product
+  const {user} = useAuth()
+    const  { classes, price, instructor, seats, image, email }  = product
     return (
         <tr className='mt-3'>
         <td className="p-2 whitespace-nowrap">
@@ -13,7 +15,7 @@ const MySingleCard = ({product}) => {
           </div>
         </td>
         <td className="p-2 whitespace-nowrap">
-          <div className="text-left">awesome course</div>
+          <div className="text-left">onak sundor hoisa</div>
         </td>
         <td className="p-2">
           <div className="text-center"><button className="btn btn-xs bg-warning text-white">Update</button></div>
