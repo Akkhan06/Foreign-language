@@ -1,15 +1,59 @@
 import React, { useEffect, useState } from "react";
 import { FaShieldAlt } from "react-icons/fa";
 import useAxios from "../../../hooks/useAxios";
+import { useQuery } from "@tanstack/react-query";
+import Swal from "sweetalert2";
 
 const ManageUser = () => {
-  const [users, setUser] = useState([])
+
   const [axiosSe] = useAxios()
-  useEffect(() => {
-    axiosSe.get('/user').then(res => {
-      setUser(res.data)
-    })
-  },[])
+  const { data: users = [], refetch } = useQuery(['user'], async () => {
+    const res = await axiosSe.get('/user')
+    return res.data;
+})
+
+
+const handleMakeAdmin = user =>{
+  fetch(`http://localhost:5000/user/admin/${user._id}`, {
+      method: 'PATCH'
+  })
+  .then(res => res.json())
+  .then(data => {
+      console.log(data)
+      if(data.modifiedCount){
+          refetch();
+          Swal.fire({
+              position: 'top-end',
+              icon: 'success',
+              title: `${user.name} is an Admin Now!`,
+              showConfirmButton: false,
+              timer: 1500
+            })
+      }
+  })
+}
+
+
+const handleMakeInstructor = user =>{
+  fetch(`http://localhost:5000/users/instructor/${user._id}`, {
+      method: 'PATCH'
+  })
+  .then(res => res.json())
+  .then(data => {
+      console.log(data)
+      if(data.modifiedCount){
+          refetch();
+          Swal.fire({
+              position: 'top-end',
+              icon: 'success',
+              title: `${user.name} is an Instructor Now!`,
+              showConfirmButton: false,
+              timer: 1500
+            })
+      }
+  })
+}
+
   return (
     <div>
       <section className="flex flex-col justify-center antialiased bg-gray-100 text-gray-600  p-4">
@@ -68,7 +112,7 @@ const ManageUser = () => {
                       </td>
                       <td className="p-2">
                         <div className="text-center">
-                          <button className="btn text-white btn-xs bg-warning">
+                          <button onClick={() => handleMakeAdmin(user)} className="btn text-white btn-xs bg-warning">
                            Admin
                           </button>
 
