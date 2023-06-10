@@ -18,6 +18,8 @@ const [axiosSe] = useAxios()
     .then(data => setCard(data))
   },[url])
 
+console.log(card)
+
 
   const statusHandler = (_id) => {
     Swal.fire({
@@ -35,15 +37,17 @@ const [axiosSe] = useAxios()
       })
       .then(res => res.json())
       .then(data => {
-          console.log(data)
+          
           const finalResult = card.find(x => x._id === _id)
+          finalResult.uniq = finalResult._id
+          delete finalResult._id
           console.log(finalResult)
           axiosSe.post('/classes', finalResult).then(finalData => {console.log(finalData.data)})
           Swal.fire('Saved!', '', 'success')
       })
         
       } else if (result.isDenied) {
-        fetch(`http://localhost:5000/myclass/${user._id}`, {
+        fetch(`http://localhost:5000/myclass/${_id}`, {
           method: 'PUT'
       })
       .then(res => res.json())

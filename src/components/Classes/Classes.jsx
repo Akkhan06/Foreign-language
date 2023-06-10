@@ -34,7 +34,7 @@ const Classes = () => {
           <h1 className="btn btn-sm mt-14 mb-5 bg-warning text-white font-semibold">
             Classes
           </h1>
-          <div className="md:flex  gap-3">
+          <div className="md:grid grid-cols-3  gap-3">
             {classCard &&
               classCard.map((pd) => <SingleCard key={pd._id} product={pd} />)}
           </div>

@@ -1,15 +1,19 @@
 import React, { useEffect, useState } from 'react';
 import HeaderTitle from '../../../components/HeaderTitle/HeaderTitle';
 import MySingleCard from './MySingleCard';
+import useAxios from '../../../hooks/useAxios';
+import useAuth from '../../../hooks/useAuth';
 
 const MyClass = () => {
-  const url = "http://localhost:5000/allclass";
+  const [axiosSe] = useAxios()
+  const {user} = useAuth()
+  const url = "http://localhost:5000/parsonaldata?email=new@gmail.com";
   const [classCard, setClassCard] = useState([]);
   useEffect(() => {
-    fetch(url)
-      .then((res) => res.json())
-      .then((data) => setClassCard(data));
-  }, []);
+    axiosSe(`/parsonaldata?email=${user.email}`).then(res => {
+      setClassCard(res.data)
+    })
+  }, [url]);
     return (
         <div>
             <HeaderTitle title={'My all class'}/>
