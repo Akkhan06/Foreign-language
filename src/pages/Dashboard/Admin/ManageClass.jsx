@@ -63,8 +63,7 @@ console.log(card)
     })
   }
 
-
-
+  
   return (
     <div>
       <div>

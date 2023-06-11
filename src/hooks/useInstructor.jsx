@@ -2,18 +2,18 @@ import { useQuery } from "@tanstack/react-query";
 import useAuth from "./useAuth";
 import useAxios from "./useAxios";
 
-
-const useAdmin = () => {
+const useInstructor = () => {
     const {user} = useAuth();
     const [axiosSe] = useAxios();
-    const {data: isAdmin, isLoading: isAdminLoading} = useQuery({
-        queryKey: ['isAdmin', user?.email],
+    const {data: isInstructor, isLoading: isInstrcutorLoading} = useQuery({
+        queryKey: ['isInstructor', user?.email],
         queryFn: async () => {
-            const res = await axiosSe.get(`/user/admin/${user?.email}`);
+            const res = await axiosSe.get(`/user/instructor/${user?.email}`);
             console.log('is admin response', res)
             return res.data.admin;
         }
     })
-    return [isAdmin, isAdminLoading]
-}
-export default useAdmin;
+    return [isInstructor, isInstrcutorLoading]
+};
+
+export default useInstructor;

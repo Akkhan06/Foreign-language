@@ -12,8 +12,10 @@ import {
   FaWallet,
 } from "react-icons/fa";
 import { Link, Outlet } from "react-router-dom";
+import useInstructor from "../hooks/useInstructor";
 
 const Dashboard = () => {
+  const [isInstructor] = useInstructor()
   return (
     <div className="flex">
         <Helmet>
@@ -51,8 +53,9 @@ const Dashboard = () => {
               </li> */}
 
               {/* instructor dashboard */}
-{/* 
-              <li className="rounded-sm">
+
+              {isInstructor && <>
+                <li className="rounded-sm">
                 <Link
                   to={"/dashboard"}
                   className="flex items-center font-semibold p-2 space-x-3 rounded-md gap-2"
@@ -68,7 +71,8 @@ const Dashboard = () => {
                   <FaProductHunt /> Add Class
                 </Link>
               </li>
-               */}
+              </>}
+              
 
           
             </ul>
