@@ -138,7 +138,8 @@ console.log(card)
                         <td className="p-2">
                           <div className="text-center">
                            <button className={`btn text-white btn-xs ${pd.status === 'pending' ? 'bg-red-500' : 'bg-success'}`}>
-                              {status === "pending" ? 'Pending' : pd.status === 'approved' ? 'Approved' : 'denied'}
+
+                              {pd.status === "pending" ? 'Pending' : pd.status === 'approved' ? 'Approved' : 'denied'}
                             </button>
                           </div>
                         </td>
