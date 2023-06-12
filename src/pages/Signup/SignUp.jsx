@@ -46,11 +46,11 @@ const SignUp = () => {
           createUser(data.email, data.password).then((result) => {
             const loggedUser = result.user;
             console.log(loggedUser);
-      
+            navigate("/")
             updateUserProfile(data.name, newData.image)
               .then(() => {
                 const saveUser = { name: data.name, email: data.email, role: "user", image: newData.image };
-                fetch("http://localhost:5000/user", {
+                fetch("https://foreign-language-akkhan06.vercel.app/user", {
                   method: "POST",
                   headers: {
                     "content-type": "application/json",
@@ -68,8 +68,9 @@ const SignUp = () => {
                         showConfirmButton: false,
                         timer: 1500,
                       });
-                      navigate("/");
+                      ;
                     }
+                    
                   });
               })
               .catch((error) => console.log(error));

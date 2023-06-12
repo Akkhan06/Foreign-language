@@ -16,7 +16,7 @@ const ManageUser = () => {
 })
 
 const handleMakeAdmin = user =>{
-  fetch(`http://localhost:5000/user/admin/${user._id}`, {
+  fetch(`https://foreign-language-akkhan06.vercel.app/user/admin/${user._id}`, {
       method: 'PATCH'
   })
   .then(res => res.json())
@@ -37,7 +37,7 @@ const handleMakeAdmin = user =>{
 
 
 const handleMakeInstructor = user =>{
-  fetch(`http://localhost:5000/users/instructor/${user._id}`, {
+  fetch(`https://foreign-language-akkhan06.vercel.app/users/instructor/${user._id}`, {
       method: 'PATCH'
   })
   .then(res => res.json())
