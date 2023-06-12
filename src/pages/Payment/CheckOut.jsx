@@ -3,8 +3,9 @@ import React, { useEffect, useState } from "react";
 import "./Checkout.css";
 import useAxios from "../../hooks/useAxios";
 import useAuth from "../../hooks/useAuth";
+import Swal from "sweetalert2";
 
-const CheckOut = ({ price, card }) => {
+const CheckOut = ({ price, cart }) => {
   const {user} = useAuth()
   const stripe = useStripe();
   const elements = useElements();
@@ -13,6 +14,7 @@ const CheckOut = ({ price, card }) => {
   const [clientSecret, setClientSecret] = useState("");
   const [transactionId, setTransactionId] = useState("");
 
+  // console.log(cart)
 
   useEffect(() => {
     if (price > 0) {
@@ -71,26 +73,31 @@ const CheckOut = ({ price, card }) => {
                 transactionId: paymentIntent.id,
                 price,
                 date: new Date(),
-                cardNewId: card._id,
-                classItems: card.menuItemId,
+                cardNewId: cart._id,
+                classItems: cart.menuItemId,
                 status: 'service pending',
-                itemNames: card.name
+                itemNames: cart.name
       }
 
       console.log(payment.cardNewId)
-      // axiosSecure.post('/payments', payment)
-      // .then(res => {
-      //   if (res.data.insertResult) {
-      //     // any alert or display result
-      //     console.log(res)
-      //   }
-      //   console.log(res.data)
-      // })
-    }
+
+      axiosSe.patch(`/payment/${payment.cardNewId}`)
+      .then(res => {
+        console.log(res.data)
+        Swal.fire({
+          position: 'top-end',
+          icon: 'success',
+          title: 'Your work has been saved',
+          showConfirmButton: false,
+          timer: 1500
+        })
+      })
+    
     
     console.log(paymentIntent)
   };
 
+  }
   return (
     <>
       <form className="m-8 w-1/2" onSubmit={handleSubmit}>

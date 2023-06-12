@@ -9,7 +9,7 @@ import { key } from "localforage";
 const ManageClass = () => {
 const [axiosSe] = useAxios()
 
-  const url = 'https://foreign-language-akkhan06.vercel.app/myclass'
+  const url = 'http://localhost:5000/myclass'
   const [status, setStatus] = useState("pending")
 
   
@@ -31,7 +31,7 @@ console.log(card)
     }).then((result) => {
       /* Read more about isConfirmed, isDenied below */
       if (result.isConfirmed) {
-        fetch(`https://foreign-language-akkhan06.vercel.app/myclass/${_id}`, {
+        fetch(`http://localhost:5000/myclass/${_id}`, {
           method: 'PUT'
       })
       .then(res => res.json())
@@ -41,7 +41,7 @@ console.log(card)
       })
 
       } else if (result.isDenied) {
-        fetch(`https://foreign-language-akkhan06.vercel.app/danied/${_id}`, {
+        fetch(`http://localhost:5000/danied/${_id}`, {
           method: 'PUT'
       })
       .then(res => res.json())
@@ -114,7 +114,7 @@ console.log(card)
                             <div className="w-10 h-10 flex-shrink-0 mr-2 sm:mr-3">
                               <img
                                 className="rounded-full"
-                                src="https://raw.githubusercontent.com/cruip/vuejs-admin-dashboard-template/main/src/images/user-36-05.jpg"
+                                src={pd.image}
                                 width="40"
                                 height="40"
                                 alt="Alex Shatov"

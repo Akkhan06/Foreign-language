@@ -19,7 +19,6 @@ const Payment = () => {
   },[]);
   // const total = cart.reduce((sum, item) => sum + item.price, 0);
   // const price = parseFloat(total.toFixed(2));
-console.log(cart)
   const {price} = cart
   // const total = parseFloat(price.toFixed(2))
 

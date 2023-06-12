@@ -5,6 +5,7 @@ import Swal from "sweetalert2";
 import useAuth from "../../hooks/useAuth";
 import SocialLogin from "../SocialLogin/SocialLogin";
 import { useState } from "react";
+import HeaderTitle from "../../components/HeaderTitle/HeaderTitle";
 const img_hosting_token = import.meta.env.VITE_image_apiKey;
 const SignUp = () => {
   const img_hosting_url = `https://api.imgbb.com/1/upload?key=${img_hosting_token}`;
@@ -49,7 +50,7 @@ const SignUp = () => {
             updateUserProfile(data.name, newData.image)
               .then(() => {
                 const saveUser = { name: data.name, email: data.email, role: "user", image: newData.image };
-                fetch("https://foreign-language-akkhan06.vercel.app/user", {
+                fetch("http://localhost:5000/user", {
                   method: "POST",
                   headers: {
                     "content-type": "application/json",
@@ -84,7 +85,9 @@ const SignUp = () => {
       <Helmet>
         <title>Foreign Language | Sign Up</title>
       </Helmet>
-      <div className="hero min-h-screen py-5 bg-base-200">
+
+      <HeaderTitle title={'Sign up'}></HeaderTitle>
+      <div className="hero ">
         <div className="card flex-shrink-0  w-10/12 md:w-1/2 max-w-sm shadow-2xl bg-base-100">
           <form onSubmit={handleSubmit(onSubmit)} className="card-body">
             <div className="form-control">

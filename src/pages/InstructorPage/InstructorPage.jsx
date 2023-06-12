@@ -12,7 +12,7 @@ const InstructorPage = () => {
 
 
   useEffect(() => {
-    axiosSe('https://foreign-language-akkhan06.vercel.app/user')
+    axiosSe('http://localhost:5000/user')
     .then(res => {
       const instructorFilter = res.data.filter(instructor => instructor.role === 'instructor')
       setInstructor(instructorFilter)

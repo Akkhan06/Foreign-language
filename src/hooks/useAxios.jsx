@@ -3,7 +3,7 @@ import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import useAuth from './useAuth';
 const axiosSe = axios.create({
-  baseURL: 'https://foreign-language-akkhan06.vercel.app', 
+  baseURL: 'http://localhost:5000', 
 });
 
 const useAxios = () => {

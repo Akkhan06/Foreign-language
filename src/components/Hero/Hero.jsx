@@ -1,20 +1,32 @@
 import React, { useEffect } from "react";
-import AOS from "aos";
-import "aos/dist/aos.css";
 import Button from "../Button/Button";
+import { motion } from 'framer-motion';
 
 const Hero = () => {
-  useEffect(() => {
-    AOS.init({ duration: 1000 }); // Initialize AOS in the component
-  }, []);
+  
   return (
-    <div
-      data-aos="fade-up"
+
+  //   <motion.div
+  // initial={{ scale: 0 }}
+  // animate={{ rotate: 180, scale: 1 }}
+  // transition={{
+  //   type: "spring",
+  //   stiffness: 260,
+  //   damping: 20
+  // }}
+// />
+
+
+    <motion.div initial={{ scale: 0 }}
+    animate={{ rotate: 360, scale: 1 }}
+    transition={{
+      type: "spring",
+      stiffness: 260,
+      damping: 20}}
       className="carousel w-full md:h-[600px] rounded-xl "
     >
       <div id="slide1" className="carousel-item relative w-full rounded-xl ">
         <img
-          data-aos="fade-up-right"
           src="https://img.freepik.com/free-photo/pleasant-looking-afro-american-woman-holds-notepads-papers-studies-college-glad-finish-studying_273609-26983.jpg?w=740&t=st=1686141594~exp=1686142194~hmac=7eea181649d223512db8c977c70ae62c21bf29923f2807b5c81f7cee12d44eb9"
           className="w-full"
         />
@@ -126,7 +138,7 @@ const Hero = () => {
           </a>
         </div>
       </div>
-    </div>
+    </motion.div>
   );
 };
 

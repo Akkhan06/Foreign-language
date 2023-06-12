@@ -17,7 +17,7 @@ const SocialLogin = () => {
                 const loggedInUser = result.user;
                 console.log(loggedInUser);
                 const saveUser = { name: loggedInUser.displayName, email: loggedInUser.email, role: 'user' }
-                fetch('https://foreign-language-akkhan06.vercel.app/user', {
+                fetch('http://localhost:5000/user', {
                     method: 'POST',
                     headers: {
                         'content-type': 'application/json'
@@ -36,7 +36,7 @@ const SocialLogin = () => {
     return (
         <div>
             <div className="divider"></div>
-            <div className="w-full text-center my-4">
+            <div className="w-full text-center">
                 <button onClick={handleGoogleSignIn} className="btn btn-circle btn-outline">
                     <FaGoogle></FaGoogle>
                 </button>
