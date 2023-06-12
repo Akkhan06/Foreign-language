@@ -16,5 +16,5 @@ Hosted in firebase -> [foreign language](https://baby-dolls.web.app/)
 - how many have language in the world
 - who is the best language 
 - which language easily to learn 
-- which language is the best for you 
+- which the bset language for you
 - Finally you will best way to learn in your switching language
