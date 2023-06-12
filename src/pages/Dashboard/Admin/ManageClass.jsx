@@ -4,20 +4,18 @@ import { Helmet } from "react-helmet";
 import useAxios from "../../../hooks/useAxios";
 import Swal from "sweetalert2";
 import { key } from "localforage";
-import useCart from "../../../hooks/useCard";
+
 
 const ManageClass = () => {
 const [axiosSe] = useAxios()
-const [, refetch] = useCart()
+
   const url = 'http://localhost:5000/myclass'
   const [status, setStatus] = useState("pending")
 
   
   const [card, setCard] = useState([])
   useEffect(() => {
-    fetch(url)
-    .then(res => res.json())
-    .then(data => setCard(data))
+   axiosSe.get('/myclass').then(data => setCard(data.data))
   },[url])
 
 console.log(card)
@@ -33,12 +31,15 @@ console.log(card)
     }).then((result) => {
       /* Read more about isConfirmed, isDenied below */
       if (result.isConfirmed) {
-        // const status = 'Approved';
-        axiosSe.put(`/myclass/${_id}`).then(data => {
-          refetch()
-          Swal.fire('Saved!', '', 'success')
-        })
-        
+        fetch(`http://localhost:5000/myclass/${_id}`, {
+          method: 'PUT'
+      })
+      .then(res => res.json())
+      .then(data => {
+          console.log(data)
+          Swal.fire('saved', '', 'success')
+      })
+
       } else if (result.isDenied) {
         fetch(`http://localhost:5000/danied/${_id}`, {
           method: 'PUT'
@@ -46,17 +47,7 @@ console.log(card)
       .then(res => res.json())
       .then(data => {
           console.log(data)
-          // if(data.modifiedCount){
-          //     refetch();
-          //     Swal.fire({
-          //         position: 'top-end',
-          //         icon: 'success',
-          //         title: `${user.name} is an Admin Now!`,
-          //         showConfirmButton: false,
-          //         timer: 1500
-          //       })
-          // }
-          refetch()
+      
           Swal.fire('Changes are not saved', '', 'info')
       })
       }
@@ -72,7 +63,7 @@ console.log(card)
           <div className="h-full">
             <div className="w-full mx-auto bg-white shadow-lg rounded-sm border border-gray-200">
               <header className="px-5 py-4 border-b border-gray-100">
-                <h2 className="font-semibold text-gray-800">Class manage</h2>
+                <h2 className="font-semibold text-gray-800">Class manage {card.length}</h2>
               </header>
               <div className="p-3">
                 <div className="overflow-x-auto">

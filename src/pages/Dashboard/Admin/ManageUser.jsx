@@ -3,9 +3,10 @@ import { FaShieldAlt } from "react-icons/fa";
 import useAxios from "../../../hooks/useAxios";
 import { useQuery } from "@tanstack/react-query";
 import Swal from "sweetalert2";
+import useAuth from "../../../hooks/useAuth";
 
 const ManageUser = () => {
-
+  // const {user} = useAuth()
   const [axiosSe] = useAxios()
   const { data: users = [], refetch } = useQuery(['user'], async () => {
     const res = await axiosSe.get('/user')
@@ -89,7 +90,7 @@ const handleMakeInstructor = user =>{
                           <div className="w-10 h-10 flex-shrink-0 mr-2 sm:mr-3">
                             <img
                               className="rounded-full"
-                              src="https://raw.githubusercontent.com/cruip/vuejs-admin-dashboard-template/main/src/images/user-36-05.jpg"
+                              src={user.image}
                               width="40"
                               height="40"
                               alt="Alex Shatov"

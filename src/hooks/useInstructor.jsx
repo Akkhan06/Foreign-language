@@ -10,7 +10,7 @@ const useInstructor = () => {
         queryFn: async () => {
             const res = await axiosSe.get(`/user/instructor/${user?.email}`);
             console.log('is admin response', res)
-            return res.data.admin;
+            return res.data.instructor;
         }
     })
     return [isInstructor, isInstrcutorLoading]

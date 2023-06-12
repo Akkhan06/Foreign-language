@@ -18,6 +18,10 @@ import MyClass from "../pages/Dashboard/Instructor/MyClass";
 import ManageUser from "../pages/Dashboard/Admin/ManageUser";
 import ManageClass from "../pages/Dashboard/Admin/ManageClass";
 import PrivateRoute from "./PrivateRoute";
+import AdminRoute from "./AdminRoute";
+import InstructorRoute from "./InstructorRoute";
+import Payment from "../pages/Payment/Payment";
+// import Payment from "../pages/Payment/Payment";
 
 
 
@@ -53,38 +57,42 @@ import PrivateRoute from "./PrivateRoute";
       path: 'dashboard',
       element: <PrivateRoute><Dashboard/></PrivateRoute>,
       children: [
-        // {
-        //   path: '/dashboard',
-        //   element: <Selected/>
-        // },
         {
-          path: '/dashboard/enrolled',
-          element: <EnroledClass/>
-        }, 
-        {
-          path: '/dashboard/history',
-          element: <PaymentHistory/>
-        },
-        {
-          path: '/dashboard/adminhome',
+          path: '/dashboard',
           element: <AdminHome/>
         },
         {
-          path: '/dashboard/addclass',
-          element: <AddClass/>
-        },
-        {
           path: "/dashboard/manageclass",
-          element: <ManageClass/>
+          element: <AdminRoute><ManageClass/></AdminRoute>
         },
         {
           path: '/dashboard/manageuser',
-          element: <ManageUser/>
+          element: <AdminRoute><ManageUser/></AdminRoute>
+        },
+        {
+          path: '/dashboard/addclass',
+          element: <InstructorRoute><AddClass/></InstructorRoute>
         },
         {
           path: '/dashboard/myclass',
-          element: <MyClass/>
-        }
+          element: <InstructorRoute><MyClass/></InstructorRoute>
+        },
+        {
+          path: '/dashboard/selected',
+          element: <PrivateRoute><Selected/></PrivateRoute>
+        },
+        {
+          path: '/dashboard/enrolled',
+          element: <PrivateRoute><EnroledClass/></PrivateRoute>
+        }, 
+        {
+          path: '/dashboard/history',
+          element: <PrivateRoute><PaymentHistory/></PrivateRoute>
+        },
+        {
+          path: '/dashboard/selectedonde/:id', 
+          element: <Payment></Payment>
+        },
       ]
     }
   ])

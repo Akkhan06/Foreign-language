@@ -13,12 +13,15 @@ import {
 } from "react-icons/fa";
 import { Link, Outlet } from "react-router-dom";
 import useInstructor from "../hooks/useInstructor";
+import useAdmin from "../hooks/useAdmin";
 
 const Dashboard = () => {
-  const [isInstructor] = useInstructor()
+  const [isInstructor] = useInstructor();
+  const [isAdmin] = useAdmin();
+  console.log(isAdmin);
   return (
     <div className="flex">
-        <Helmet>
+      <Helmet>
         <title>Foreign Language | dashboard</title>
       </Helmet>
       <div className="flex flex-col h-screen p-3 bg-white shadow w-60">
@@ -28,53 +31,84 @@ const Dashboard = () => {
           </div>
           <div className="flex-1">
             <ul className="pt-2 pb-4 space-y-1 text-sm">
-
               {/* Admin Dashboard */}
-              <li className="rounded-sm">
-                <Link to={'/dashboard/adminhome'} className="flex items-center font-semibold p-2 space-x-3 rounded-md gap-2"><FaHome/> Admin Home</Link>
-              </li>
-              <li className="rounded-sm">
-                <Link to='/dashboard/manageclass' className="flex items-center font-semibold p-2 space-x-3 rounded-md gap-2"><FaWallet/> Manage Classes</Link>
-              </li>
-              <li className="rounded-sm">
-                <Link to='/dashboard/manageuser' className="flex items-center font-semibold p-2 space-x-3 rounded-md gap-2"><FaUser/> Manage Users</Link>
-              </li>
-
-
-              {/* Student dashboard */}
-              {/* <li className="rounded-sm">
-                <Link to={'/dashboard'} className="flex items-center font-semibold p-2 space-x-3 rounded-md gap-2"><FaCheckCircle/> My Selected Classes</Link>
-              </li>
-              <li className="rounded-sm">
-                <Link to='/dashboard/enrolled' className="flex items-center font-semibold p-2 space-x-3 rounded-md gap-2"><FaCheck/> My Enrolled Classes</Link>
-              </li>
-              <li className="rounded-sm">
-                <Link to='/dashboard/history' className="flex items-center font-semibold p-2 space-x-3 rounded-md gap-2"><FaHistory/> Payment history</Link>
-              </li> */}
-
-              {/* instructor dashboard */}
-
-              {isInstructor && <>
-                <li className="rounded-sm">
-                <Link
-                  to={"/dashboard"}
-                  className="flex items-center font-semibold p-2 space-x-3 rounded-md gap-2"
-                >
-                  <FaHome /> My Class
-                </Link>
-              </li>
-              <li className="rounded-sm">
-                <Link
-                  to="/dashboard/addclass"
-                  className="flex items-center font-semibold p-2 space-x-3 rounded-md gap-2"
-                >
-                  <FaProductHunt /> Add Class
-                </Link>
-              </li>
-              </>}
-              
-
-          
+              {isAdmin ? 
+                <>
+                  <li className="rounded-sm">
+                    <Link
+                      to={"/dashboard"}
+                      className="flex items-center font-semibold p-2 space-x-3 rounded-md gap-2"
+                    >
+                      <FaHome /> Admin Home
+                    </Link>
+                  </li>
+                  <li className="rounded-sm">
+                    <Link
+                      to="/dashboard/manageclass"
+                      className="flex items-center font-semibold p-2 space-x-3 rounded-md gap-2"
+                    >
+                      <FaWallet /> Manage Classes
+                    </Link>
+                  </li>
+                  <li className="rounded-sm">
+                    <Link
+                      to="/dashboard/manageuser"
+                      className="flex items-center font-semibold p-2 space-x-3 rounded-md gap-2"
+                    >
+                      <FaUser /> Manage Users
+                    </Link>
+                  </li>
+                </>
+               : 
+               <>
+              { isInstructor ? 
+                <>
+                  <li className="rounded-sm">
+                    <Link
+                      to={"/dashboard/myclass"}
+                      className="flex items-center font-semibold p-2 space-x-3 rounded-md gap-2"
+                    >
+                      <FaHome /> My Class
+                    </Link>
+                  </li>
+                  <li className="rounded-sm">
+                    <Link
+                      to="/dashboard/addclass"
+                      className="flex items-center font-semibold p-2 space-x-3 rounded-md gap-2"
+                    >
+                      <FaProductHunt /> Add Class
+                    </Link>
+                  </li>
+                </>
+               : 
+                <>
+                  <li className="rounded-sm">
+                    <Link
+                      to={"/dashboard/selected"}
+                      className="flex items-center font-semibold p-2 space-x-3 rounded-md gap-2"
+                    >
+                      <FaCheckCircle /> My Selected Classes
+                    </Link>
+                  </li>
+                  <li className="rounded-sm">
+                    <Link
+                      to="/dashboard/enrolled"
+                      className="flex items-center font-semibold p-2 space-x-3 rounded-md gap-2"
+                    >
+                      <FaCheck /> My Enrolled Classes
+                    </Link>
+                  </li>
+                  <li className="rounded-sm">
+                    <Link
+                      to="/dashboard/history"
+                      className="flex items-center font-semibold p-2 space-x-3 rounded-md gap-2"
+                    >
+                      <FaHistory /> Payment history
+                    </Link>
+                  </li>
+                </>}
+                </>
+              }
             </ul>
           </div>
 

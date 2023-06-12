@@ -30,6 +30,7 @@ const SignUp = () => {
       .then((imageResponce) => {
         if (imageResponce.success) {
           const imgUrl = imageResponce.data.display_url;
+          console.log(imgUrl)
           const { name, price, category, recipe } = data;
           const newData = {
             name,
@@ -37,7 +38,6 @@ const SignUp = () => {
             category,
             recipe,
             image: imgUrl
-            
           };
           console.log(newData.image);
 
@@ -48,7 +48,7 @@ const SignUp = () => {
       
             updateUserProfile(data.name, newData.image)
               .then(() => {
-                const saveUser = { name: data.name, email: data.email, role: "user" };
+                const saveUser = { name: data.name, email: data.email, role: "user", image: newData.image };
                 fetch("http://localhost:5000/user", {
                   method: "POST",
                   headers: {

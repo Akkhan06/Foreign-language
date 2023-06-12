@@ -11,6 +11,7 @@
   },
   "dependencies": {
     "@glidejs/glide": "^3.6.0",
+    "@stripe/react-stripe-js": "^2.1.0",
     "@stripe/stripe-js": "^1.54.0",
     "@tanstack/react-query": "^4.29.12",
     "aos": "^2.3.4",
@@ -19,7 +20,8 @@
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-helmet": "^6.1.0",
-    "react-query": "^3.39.3"
+    "react-query": "^3.39.3",
+    "stripe": "^12.9.0"
   },
   "devDependencies": {
     "@types/react": "^18.0.37",

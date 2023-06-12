@@ -7,10 +7,10 @@ const useCart = () => {
     // const token = localStorage.getItem('access-token');
     const [axiosSe] = useAxios();
     const { refetch, data: cart = [] } = useQuery({
-        queryKey: ['carts', user?.email],
+        queryKey: ['myclass', user?.email],
         enabled: !loading,
         queryFn: async () => {
-            const res = await axiosSe(`/carts?email=${user?.email}`)
+            const res = await axiosSe(`/selected?email=${user?.email}`)
             console.log('res from axios', res)
             return res.data;
         },

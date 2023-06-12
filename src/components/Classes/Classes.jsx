@@ -1,31 +1,55 @@
 import React, { useEffect, useState } from "react";
-import Button from "../Button/Button";
-
 import Swal from "sweetalert2";
 import HeaderTitle from "../HeaderTitle/HeaderTitle";
 import SingleCard from "./SingleCard";
+import useAxios from "../../hooks/useAxios";
+import useAuth from "../../hooks/useAuth";
+import { useQuery } from "@tanstack/react-query";
 
 const Classes = () => {
-
-  const url = "http://localhost:5000/allclass";
+  const { user } = useAuth();
+  const [axiosSe] = useAxios();
   const [classCard, setClassCard] = useState([]);
-  const [approvedC, setApprovedC] = useState([]);
-
+  const [selected, setSelected] = useState(true);
+  const { data: users = [], refetch } = useQuery(["selected"], async () => {
+    // const res = await axiosSe.get('/user')
+    // return res.data;
+  });
   useEffect(() => {
-    fetch(url)
-      .then((res) => res.json())
-      .then((data) => {
-        const approvedCard = data.filter(pd => pd.status === 'approved')
-        setClassCard(approvedCard)
-        console.log(approvedCard)
-      });
-  }, [url]);
+    axiosSe.get("/allclass").then((data) => {
+      const filteringData = data.data.filter((pd) => pd.status === "approved");
+      console.log(filteringData);
+      setClassCard(filteringData);
+    });
+  }, []);
 
+  const selectHandler = (_id) => {
+    const selectedItem = classCard.find((item) => item._id === _id);
+    const { classes, price, instructor, seats, image, status } = selectedItem;
+    const newItems = {
+      classes,
+      price,
+      instructor,
+      image,
+      email: user?.email,
+      status: "select",
+    };
+    console.log(newItems);
+    axiosSe.post(`/select`, newItems).then((res) => {
+      console.log(res.data);
+    });
 
-
-  const modal = () => {
-    Swal.fire("log in before selecting the course");
+    // fetch(`http://localhost:5000/select/${_id}`, {
+    //   method: "PUT",
+    // })
+    //   .then((res) => res.json())
+    //   .then((data) => {
+    //     refetch();
+    //     console.log(data);
+    //     Swal.fire("selected", "", "success");
+    //   });
   };
+
   return (
     <>
       <div className="w-10/12 mx-auto">
@@ -44,7 +68,14 @@ const Classes = () => {
           </h1>
           <div className="md:grid grid-cols-3  gap-3">
             {classCard &&
-              classCard.map((pd) => <SingleCard key={pd._id} product={pd} />)}
+              classCard.map((pd) => (
+                <SingleCard
+                  key={pd._id}
+                  selectHandler={selectHandler}
+                  selected={selected}
+                  product={pd}
+                />
+              ))}
           </div>
         </div>
       </div>
