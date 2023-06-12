@@ -4,15 +4,16 @@ import useAxios from "../../../hooks/useAxios";
 import { useQuery } from "@tanstack/react-query";
 import Swal from "sweetalert2";
 import useAuth from "../../../hooks/useAuth";
+import useAdmin from "../../../hooks/useAdmin";
 
 const ManageUser = () => {
   // const {user} = useAuth()
+  const [isAdmin] = useAdmin()
   const [axiosSe] = useAxios()
   const { data: users = [], refetch } = useQuery(['user'], async () => {
     const res = await axiosSe.get('/user')
     return res.data;
 })
-
 
 const handleMakeAdmin = user =>{
   fetch(`http://localhost:5000/user/admin/${user._id}`, {
@@ -113,11 +114,11 @@ const handleMakeInstructor = user =>{
                       </td>
                       <td className="p-2">
                         <div className="text-center">
-                          <button onClick={() => handleMakeAdmin(user)} className="btn text-white btn-xs bg-warning">
+                          <button disabled={user.role === "admin"} onClick={() => handleMakeAdmin(user)} className="btn text-white btn-xs bg-warning">
                            Admin
                           </button>
 
-                          <button onClick={() => handleMakeInstructor(user)} className="btn text-white btn-xs bg-yellow-500">
+                          <button disabled={user.role === "instructor"} onClick={() => handleMakeInstructor(user)} className="btn text-white btn-xs bg-yellow-500">
                                 Instructor
                               </button>
                         </div>
