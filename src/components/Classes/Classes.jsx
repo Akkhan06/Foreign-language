@@ -33,22 +33,17 @@ const Classes = () => {
       image,
       email: user?.email,
       status: "select",
+      classId: selectedItem._id,
+      payment: "incomplete"
     };
     console.log(newItems);
+    console.log(user.email)
     axiosSe.post(`/select`, newItems).then((res) => {
       console.log(res.data);
     });
 
-    // fetch(`http://localhost:5000/select/${_id}`, {
-    //   method: "PUT",
-    // })
-    //   .then((res) => res.json())
-    //   .then((data) => {
-    //     refetch();
-    //     console.log(data);
-    //     Swal.fire("selected", "", "success");
-    //   });
-  };
+};
+
 
   return (
     <>

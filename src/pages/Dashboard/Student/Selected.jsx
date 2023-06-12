@@ -10,7 +10,8 @@ const Selected = () => {
 
   useEffect(() => {
     axiosSe(`/selected?email=${user.email}`).then(res => {
-      setSelectedItems(res.data)
+      const enrolledItems = res.data.filter(pd => pd.payment === 'incomplete')
+      setSelectedItems(enrolledItems)
     })
   } ,[])
     return (

@@ -6,7 +6,7 @@ const SingleCard = ({product, selectHandler, }) => {
     const  { classes, price, instructor, seats, image, _id }  = product
     return (
         <div className="w-full mt-2 max-w-sm bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
-            
+
              <div className="flex justify-center"> <img
                 className="p-8 rounded-t-lg md:h-80 md:w-96"
                 src={image}
@@ -35,7 +35,7 @@ const SingleCard = ({product, selectHandler, }) => {
                 <span className="text-3xl font-bold text-gray-900 dark:text-white">
                   ${price}
                 </span>
-                <button onClick={() => selectHandler(_id)}
+                <button  onClick={() => selectHandler(_id)}
                   className="text-white bg-warning border-none hover:bg-yellow-500 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
                 >
                   Select

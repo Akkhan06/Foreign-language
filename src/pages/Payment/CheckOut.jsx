@@ -11,6 +11,8 @@ const CheckOut = ({ price, card }) => {
   const [cardError, setCardError] = useState("");
   const [axiosSe] = useAxios();
   const [clientSecret, setClientSecret] = useState("");
+  const [transactionId, setTransactionId] = useState("");
+
 
   useEffect(() => {
     if (price > 0) {
@@ -60,6 +62,31 @@ const CheckOut = ({ price, card }) => {
       },
     );
 
+
+    if (paymentIntent.status === "succeeded") {
+      setTransactionId(paymentIntent.id);
+
+      const payment = {
+        email: user?.email,
+                transactionId: paymentIntent.id,
+                price,
+                date: new Date(),
+                cardNewId: card._id,
+                classItems: card.menuItemId,
+                status: 'service pending',
+                itemNames: card.name
+      }
+
+      console.log(payment.cardNewId)
+      // axiosSecure.post('/payments', payment)
+      // .then(res => {
+      //   if (res.data.insertResult) {
+      //     // any alert or display result
+      //     console.log(res)
+      //   }
+      //   console.log(res.data)
+      // })
+    }
     
     console.log(paymentIntent)
   };
@@ -92,7 +119,12 @@ const CheckOut = ({ price, card }) => {
           Pay
         </button>
       </form>
-      {cardError ?? <p className="text-red-800">{cardError}</p>}
+      {cardError && <p className="text-red-600 ml-8">{cardError}</p>}
+      {transactionId && (
+        <p className="text-green-500">
+          Transaction complete with transactionId: {transactionId}
+        </p>
+      )}
     </>
   );
 };

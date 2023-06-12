@@ -15,6 +15,8 @@ const MyClass = () => {
       setClassCard(res.data)
     })
   }, []);
+
+  
     return (
         <div>
             <HeaderTitle title={'My all class'}/>

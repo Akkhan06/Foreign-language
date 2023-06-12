@@ -1,6 +1,20 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
+import useAuth from '../../../hooks/useAuth';
+import useAxios from '../../../hooks/useAxios';
 
 const EnroledClass = () => {
+
+  const {user} = useAuth()
+  const [selectedItems, setSelectedItems] = useState([])
+  const [axiosSe] = useAxios()
+
+  useEffect(() => {
+    axiosSe(`/selected?email=${user.email}`).then(res => {
+      const enrolledItems = res.data.filter(pd => pd.payment === 'complete')
+      setSelectedItems(enrolledItems)
+    })
+  } ,[])
+
     return (
         <section className="flex flex-col justify-center antialiased bg-gray-100 text-gray-600 min-h-screen p-4">
           <div className="h-full">
@@ -28,25 +42,26 @@ const EnroledClass = () => {
                       </tr>
                     </thead>
                     <tbody className="text-sm divide-y divide-gray-100">
-                      <tr>
+                    {selectedItems && 
+                      selectedItems.map(pd => <tr className='pt-3'>
                         <td className="p-2 whitespace-nowrap">
                           <div className="flex items-center">
                             <div className="w-10 h-10 flex-shrink-0 mr-2 sm:mr-3">
-                              <img className="rounded-full" src="https://raw.githubusercontent.com/cruip/vuejs-admin-dashboard-template/main/src/images/user-36-05.jpg" width="40" height="40" alt="Alex Shatov" />
+                              <img className="rounded-full" src={pd.image} width="40" height="20" alt="Alex Shatov" />
                             </div>
-                            <div className="font-medium text-gray-800">Course Name</div>
+                            <div className="font-medium text-gray-800">{pd.classes}</div>
                           </div>
                         </td>
                         <td className="p-2 whitespace-nowrap">
-                          <div className="text-left">Afsar Khan</div>
+                          <div className="text-left">{pd.instructor}</div>
                         </td>
                         <td className="p-2">
                           <div className="text-center"><button className='btn-sm bg-blue-100 text-yellow-900 rounded-xl'>delete</button></div>
                         </td>
                         <td className="p-2">
-                          <div className="text-center"><button className='btn no-underline btn-link'>Paid</button></div>
+                          <Link to={`/dashboard/selectedonde/${pd._id}`}><div className="text-center"><button className='btn-sm bg-yellow-500 text-white rounded-xl border-t-yellow-300'>Pay</button></div></Link>
                         </td>
-                      </tr>
+                      </tr>)}
                     </tbody>
                   </table>
                 </div>
