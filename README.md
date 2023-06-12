@@ -1,7 +1,7 @@
 ### FOREIGN LANGUAGE
 
 ## Live Link
-Hosted in firebase -> [foreign language](https://baby-dolls.web.app/)
+Hosted in firebase -> [foreign language](https://foreign-language-c9d2a.web.app/)
 
 ## Used technology 
 - MongoDb

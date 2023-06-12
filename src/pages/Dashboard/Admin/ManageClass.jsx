@@ -9,7 +9,7 @@ import { key } from "localforage";
 const ManageClass = () => {
 const [axiosSe] = useAxios()
 
-  const url = 'http://localhost:5000/myclass'
+  const url = 'https://foreign-language-akkhan06.vercel.app/myclass'
   const [status, setStatus] = useState("pending")
 
   
@@ -31,7 +31,7 @@ console.log(card)
     }).then((result) => {
       /* Read more about isConfirmed, isDenied below */
       if (result.isConfirmed) {
-        fetch(`http://localhost:5000/myclass/${_id}`, {
+        fetch(`https://foreign-language-akkhan06.vercel.app/myclass/${_id}`, {
           method: 'PUT'
       })
       .then(res => res.json())
@@ -41,7 +41,7 @@ console.log(card)
       })
 
       } else if (result.isDenied) {
-        fetch(`http://localhost:5000/danied/${_id}`, {
+        fetch(`https://foreign-language-akkhan06.vercel.app/danied/${_id}`, {
           method: 'PUT'
       })
       .then(res => res.json())

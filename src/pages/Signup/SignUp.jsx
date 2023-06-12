@@ -49,7 +49,7 @@ const SignUp = () => {
             updateUserProfile(data.name, newData.image)
               .then(() => {
                 const saveUser = { name: data.name, email: data.email, role: "user", image: newData.image };
-                fetch("http://localhost:5000/user", {
+                fetch("https://foreign-language-akkhan06.vercel.app/user", {
                   method: "POST",
                   headers: {
                     "content-type": "application/json",
